@@ -162,3 +162,155 @@ sendMessage("yh", to: "a", "b")
 
 
 //스위프트는 함수형 프로그래밍 패러다임을 포함하는 다중 패러다임 형식이라 함수를 일급객체로 여긴다.따라서 함수를 상수나 변수에 할당할 수 있고, 매개변수를 통해 전달 가능하다.
+
+//8. 조건문
+/*
+ 조건에 따라 애플리케이션을 다르게 동작하도록 하는 것이다
+ if, switch, guard
+ */
+
+//if구문
+let age = 20
+
+if age < 19 {
+    print("미성년자")
+}
+else {
+    print("성인")
+}
+
+let animal = "pig"
+
+if animal == "dog" {
+    print("개")
+} else if animal == "cat"{
+    print("고양이")
+}else {
+    print("해당하는 동물이 없습니다.")
+}
+
+
+//switch구문
+ let color = "green"
+
+switch color {
+case "red":
+    print("빨강")
+case "blue":
+    print("파랑")
+default:
+    print("찾는 색상이 없습니다.")
+}
+
+//범위 연산자도 사용가능하다.
+
+let temperature = 30
+
+switch temperature {
+case -20 ... 9:
+    print("겨울입니다.")
+case 10...14:
+    print("가을입니다.")
+case 15...25:
+    print("봄입니다.")
+case 26...30:
+    print("여름입니다.")
+default:
+    print("이상 기후입니다.")
+}
+
+
+//9. 반복문
+//반복적으로 코드가 실행되게 만드는 구문을 말한다.
+//for-in, while, repeat-while
+
+//for-in 일정횟수만큼 특정 문장을 반복하고자 할 때.
+for i in 1...4 {
+    print(i, terminator: " ")
+}
+
+let array: [Int] = [1, 2, 3, 4, 5]
+
+for i in array {
+    print(i, terminator: "/")
+}
+print("")
+ 
+
+//while - 정해진 횟수없이 조건식 불만족할 때까지 실행구문을 반복한다.
+var number = 5
+
+while number < 10 {
+    print(number)
+    number += 1
+}
+
+
+//repeat-while 적어도 한 번은 구문이 실행된다.
+var x = 6
+
+repeat {
+    x += 2
+}while x < 5
+
+print(x) //repeat-while 구문은 조건을 만족하지 않더라도 적어도 한 번은 구문이 실행되기 때문에 x는 8이 된다.
+
+
+//10. 옵셔널
+/*
+ 값이 있을 수도 있고 없을 수도 있다.
+ */
+
+var name: String?
+var optionalName: String? = "yh" //nil 뿐만이 아니라 일반 값도 넣을 수 있다.
+print(optionalName) //옵셔널 변수는 일반 변수와 구분된다.
+
+//11. 옵셔널 바인딩
+/*
+ 옵셔널 값 추출 방법, 옵셔널 해제 방법
+ 명시적 해제 - 강제 해제, 비강제 해제(옵셔널 바인딩)
+ 묵시적 해제 - 컴파일러에 의한 자동 해제, 옵셔널의 묵시적 해제
+ */
+
+var num: Int? = 3
+print(num) //Optional(3)
+print(num!)  //3 - 옵셔널 강제 해제, 위험한 방법
+
+//안전하게 옵셔널 값을 추출하는 방법
+//비강제 해제(옵셔널 바인딩)
+if let result = num { //추출된 값이 변수 또는 상수로 result에 할당된다.
+    print(result)
+} else {
+    print("추출 실패 시 실행된다.")
+}
+
+//guard문으로 옵셔널 바인딩하는 방법
+func test() {
+    let number: Int? = 5
+    guard let result = number else { return }
+    print(result)
+}
+test()
+
+/*
+ if문을 사용하면 추출된 변수나 상수를 if문 안에서만 사용할 수 있는 반면에, guard문을 사용하면 guard문 다음, 함수 전체에서 추출된 변수나 상수를 사용할 수 있다.
+ guard문은 조건식을 통과하지 못하면 else문을 수행한 뒤 흐름을 종료해버린다.
+ */
+
+//묵시적 해제
+
+//1. 컴파일러가 자동적으로 해제한다.
+let value: Int? = 6
+if value == 6 {
+    print("value가 6입니다.")
+}else {
+    print("value가 6이 아닙니다.")
+}
+
+//2.옵셔널의 묵시적해제
+//데이터 타입 뒤에 !을 붙여 선언하면 묵시적 옵셔널 해제가 되어 자유롭게 일반값처럼 사용이 가능하다.
+let string: String = "12"
+var stringToInt: Int! = Int(string)
+print(stringToInt + 1)
+
+
