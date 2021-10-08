@@ -314,3 +314,227 @@ var stringToInt: Int! = Int(string)
 print(stringToInt + 1)
 
 
+//12. 구조체
+/*
+ 구조체와 클래스는 ㅍ데이터를 용도에 맞게 표현할 때 유용하다.
+ 구조화된 데이터와 기능을 만들 수 있어 새로운 사용자 정의 데이터 타입을 만들 수 있다.
+ 둘의 차이점: 구조체의 인스턴스는 값 타입, 클래스의 인스턴스는 참조 타입
+ */
+
+/*
+struct User {
+    var nickname: String
+    var age: Int
+    
+    func infomation() {
+        print("\(nickname) \(age)")
+    }
+}
+
+//인스턴스 - 메모리에 생성되는 클래스 또는 구조체의 실체
+
+var user = User(nickname: "yh", age: 100) //생성자 자동 생성
+user.nickname//인스턴스의 프로퍼티 접근하기
+user.nickname = "Arbelt"
+user.nickname
+
+//인스턴스의 메서드 접근하기
+user.infomation()
+*/
+
+//13. 클래스
+
+class Dog {
+    var name: String = ""
+    var age: Int = 0
+    
+    //class에서는 생성자를 정의해주어야 한다.
+    init() {
+    }
+    
+    func infomation() {
+        print("\(name) \(age)")
+    }
+}
+
+var dog = Dog()
+dog.name = "CoCo"
+dog.age = 3
+dog.infomation()
+
+
+
+//14. 초기화 구문 init
+/*
+ 클래스나 구조체 또는 열거형의 인스턴스를 사용하기 위한 준비 과정
+ 사용 이유 새 인스턴스를 생성하기 전 필요한 설정을 위함
+ */
+class User {
+    var nickname: String
+    var age: Int
+    
+    init(nickname: String, age: Int) {
+        self.nickname = nickname
+        self.age = age
+    }
+    
+    init(age: Int) {
+        self.nickname = "who"
+        self.age = age
+    }
+    
+    deinit {
+        print("deinit user")
+    }
+}
+
+var user: User = User(nickname: "yh", age: 100)
+user.nickname
+user.age
+
+var user2: User = User(age: 400)
+user2.nickname
+user2.age
+
+/*
+ 디이니셜라이즈
+ 인스턴스가 메모리에 해제되기 직전에 호출, 클랫 인스턴스와 관련하여 정의작업을 구현할 수 있다.
+ 클래스에서만 구현할 수 있다.
+ */
+
+var user3: User? = User(age: 23)
+user3 = nil // 인스턴스에 nil을 할당하면 더 이상 해당 인스턴스가 필요하지 않다고 판단하여 deinit 호출한다.
+
+//15. 프로퍼티
+/*
+ 클래스, 구조체 또는 열거형 등에 관련된 값을 뜻한다
+ 인스턴스에 소속된 변수 및 습성
+ 저장 프로퍼티-변수 또는 상수
+ 연산 프로퍼티-특정 연산을 실행하는 결과값
+ 타입 프로퍼티- 특정 타입에서 사용되는 프로퍼티
+ */
+
+//저장 프로퍼티
+//구조체 또는 클래스에서 사용 가능
+//인스턴스의 프로퍼티에 값이 저장되는걸 저장 프로퍼티라고 한다
+struct Cat {
+    var name: String
+    let gender: String //상수이므로 값 변경 불가
+}
+
+var cat = Cat(name: "cat", gender: "Female")
+print(cat)
+
+let cat2 = Cat(name: "cat2", gender: "Male")
+//구조체가 값 타입이기 때문에 구조체 인스턴스를 상수로 선언하면 내부 프로퍼티도 상수가 되서 수정 불가하다.
+//클래스는 참조 타입이기 때문에 클래스의 인스턴스를 상수로 선언해도 변수로 선언된 내부 프로퍼티는 수정이 가능하다.
+
+
+//연산 프로퍼티
+//구조체, 클래스, 열거형에서 사용 가능
+//getter, setter를 이용하여 값을 연산하고 프로퍼티에 전달해주는 것이 연산 프로퍼티이다.
+struct Stock {
+    var averagePrice: Int
+    var quntity: Int
+    var purachasePrice: Int {
+        get{//get만 작성하면 읽기전용 프로퍼티가 된다.
+            return averagePrice * quntity
+        }
+        set(newPrice) { //매개변수를 생략하고 매개변수 대신에 newValue라는 이름으로 사용할 수 있다.
+            averagePrice = newPrice / quntity
+        }
+    }
+}
+var stock = Stock(averagePrice: 2300, quntity: 3)
+print(stock)
+stock.purachasePrice //get 실행
+stock.purachasePrice = 3000 //set 실핼
+stock.averagePrice
+
+
+//property Observers 프로퍼티 감시자
+//프로퍼티의 값을 변화를 관찰하고 반영한다. 프로퍼티가 set 될 때마다 호출된다.
+//사용 가능 경우, 저장 프로퍼티와 오버라이드된 저장 프로퍼티와 연산 프로퍼티
+class Account {
+    var credit: Int = 0 {
+        //소괄호 이름 지정
+        willSet {//값이 저장되기 직전에 호출되는 Observers
+            print("잔액이 \(credit)원에서 \(newValue)원으로 변경될 예정입니다.")
+        }
+        didSet { //값이 저장된 직후 호출되는 Observes
+            print("잔액이 \(oldValue)원에서 \(credit)원으로 변경되었습니다.")
+        }
+    }
+}
+
+var account = Account()
+account.credit = 100
+//잔액이 0원에서 100원으로 변경될 예정입니다.
+//잔액이 0원에서 100원으로 변경되었습니다.
+
+
+//타입 프로퍼티
+//인스턴스 생성없이 객체 내 프로퍼티에 접근을 가능하게 하는 것
+//프로퍼티 타입 자체와 연결하는 것을 의미한다.
+struct SomeStructure {
+    static var storedTypreProperty = "Some Value" //static 키워드로 타입 프로퍼티 설정
+    static var computeTypeProperty: Int { //static 키워드로 타입 프로퍼티 생성
+        return 1
+    }
+}
+
+//별도의 인스턴스 생성 없이 타입 프로퍼티에 접근 가능하다.
+//값 변경도 가능하다. -> 문법 책) 인스턴스의 프로퍼티 값이 변경되는 것이 아니라, 객체 자체의 값이 변경되는 것이기 때문에 모든 인스턴스에 영향을 미친다.
+
+
+//16. 클래스와 구조체 차이
+/*
+ 공통점
+ 값을 저장할 프로퍼티를 선언할 수 있다.
+ 함수적 기능을 하는 메서드를 선언할 수 있다.
+ 내부 값에 .을 사용하여 접근할 수 있다.
+ 생성자를 사용해 초기 상태를 설정할 수 있습니다.
+ extension을 사용해 기능을 확장할 수 있다.
+ Protocol을 채택하여 기능을 설정할 수 있다.
+ 
+ 차이점
+ 클래스
+ 중요 참조타입 -> 메모리 스택 영역에는 포인터, 즉 하나의 인스턴스 주소만 할당되고 실제 데이터는 힙 영역에 할당된다.
+ ARC로 메모리를 관리한다. <- 실제 데이터는 힙 영역에 할당되기 때문에,
+ 상속이 가능하다.
+ 타입 캐스팅을 통해 런타임에서 클래스 인스턴스의 타입을 확인할 수 있다.
+ deinit을 사용하여 클래스 인스턴스의 메모리 할당을 해제할 수 있다.
+ 같은 클래스 인스턴스를 여러 개의 변수에 할당한 뒤 값을 변경 시키면 모든 변수에 영향을 준다.(메모리가 복사됨)
+ 
+ 구조체
+ 중요 값 타입
+ 구조체 변수를 새로운 변수에 할당할 때마다 새로운 구조체가 할당된다. -> 값 타입이므로 할당할 때마다 새 copy 버전이 생긴다.
+ 즉 같은 구조체를 여러 개의 변수에 할당한 뒤 값을 변경시키더라도 다른 변수에 영향을 주지 않음(값 자체를 복사)
+ */
+
+//값 타입과 참조 타입의 차이
+class SomeClass {
+    var count: Int = 0
+}
+
+struct SomeStruct {
+    var count: Int = 0
+}
+
+//같은 클래스 인스턴스를 여러 개의 변수에 할당한 뒤 값을 변경 시키면 모든 변수에 영향을 준다.(메모리가 복사됨) 확인
+var class1 = SomeClass()
+var class2 = class1
+var class3 = class1
+
+class3.count = 2
+class1.count
+
+
+//즉 같은 구조체를 여러 개의 변수에 할당한 뒤 값을 변경시키더라도 다른 변수에 영향을 주지 않음(값 자체를 복사) 확인
+var struct1 = SomeStruct()
+var struct2 = struct1
+
+struct2.count = 3
+struct2.count
+struct1.count
+
