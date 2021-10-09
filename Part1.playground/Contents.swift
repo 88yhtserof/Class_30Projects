@@ -538,3 +538,74 @@ struct2.count = 3
 struct2.count
 struct1.count
 
+
+
+//17. 상속
+//부모가 자식에게 재산을 물려주는 행위
+//클래스가 다른 클래스로부터 특성을 상속하고 받는것
+//스위프트에서 상속은 클래스만의 특징
+//부모 클래스의 메서드, 프로퍼티, 서브스크립트를 호출할 수 있다.
+//오버라이딩을 통해 메서드, 프로퍼티, 서브스크립트를 자신만의 내용으로 만들 수 있다.
+//자식 클래스에서 프로퍼티 감시자를 구현할 수 있다.
+
+class Vehicle {
+    var currentSpeed = 0.0
+    var description: String {
+        return "traveling at \(currentSpeed) miles per hour"
+    }
+    func makeNoise() {
+        print("Speaker on")
+    }
+    
+}
+
+class Bicycle: Vehicle { //부모 클래스의 프로퍼티, 메서드, 서브스크립를 모두 사용할 수 있다.
+    var hasBasket = false
+    
+}
+
+var bicycle = Bicycle()
+bicycle.currentSpeed //부모 클래스의 프로퍼티 사용
+
+class Train: Vehicle {
+    override func makeNoise() {
+        //부모 클래스의 특성을 활용하고 싶은 때에는 super라는 키워드를 사용한다.
+        super.makeNoise() //부모 클래스의 메서드를 실행
+        print("Choo! Choo!")
+    }
+}
+
+let train = Train()
+train.makeNoise()
+
+//프로퍼티를 오버라이드, 즉 재정의한다는 것은 프로퍼티의 getter, setter, Observers(감시자)를 재정의한다는 말이다.
+
+class Car: Vehicle {
+    var gear = 1
+    //프로퍼티 오버라이드
+    override var description: String {
+        return super.description + "in gear \(gear)"
+    }
+    
+}
+
+let car = Car()
+car.currentSpeed = 30.0
+car.gear = 2
+print(car.description)
+
+//프로퍼티 Observers 감시자 오버라이드
+class AutomaticCar: Car {
+    override var currentSpeed: Double {
+        didSet {
+            gear = Int(currentSpeed / 10 ) + 1
+        }
+    }
+}
+
+let automatic = AutomaticCar()
+automatic.currentSpeed = 35.0
+print("AutimaticCar: \(automatic.description)")
+
+//final 키워드를 메서드, 프로퍼티 앞에 작성하면 오버라이드를 막을 수 있다.
+//클래스 앞에 final 키워드를 사용하면 상속을 막을 수 있다.
