@@ -609,3 +609,69 @@ print("AutimaticCar: \(automatic.description)")
 
 //final 키워드를 메서드, 프로퍼티 앞에 작성하면 오버라이드를 막을 수 있다.
 //클래스 앞에 final 키워드를 사용하면 상속을 막을 수 있다.
+
+
+//18. 타입 캐스팅
+/*
+ 인스턴스의 타입을 확인하거나 어떠한 클래스의 인스턴스를 해당 클래스 계층 구조의 슈퍼 클래스나 서브 클래스로 취급하는 방법
+ 인스턴스의 타입 확인, 인스턴스를 슈퍼클래스 또는 서브 클래스처럼 다루기 위해 사용
+ is, as 연산자 값의 타입을 확인하거나 다른 타입으로 전환하는데 사용.
+ */
+
+class MediaItem {
+    var name: String
+    init(name: String) {
+        self.name = name
+    }
+}
+
+class Movie: MediaItem {
+    var director: String
+    init(name: String, director: String) {
+        self.director = director
+        super.init(name: name)
+    }
+}
+
+class Song: MediaItem {
+    var artist: String
+    init(name:String, artist: String) {
+        self.artist = artist
+        super.init(name: name)
+    }
+}
+
+let library = [
+    Movie(name: "기생충", director: "봉준호"), Song(name: "Butter", artist: "BTS"),
+    Movie(name: "올드보이", director: "박찬욱"),
+    Song(name: "WonserWall", artist: "Oasis"),
+    Song(name: "Rain", artist: "이적")]
+//라이브러리 배열은 타입 추론의 의해 Movie, Song 클래스의 부모 클래스인 MediaItem이다.
+
+var movieCount = 0
+var songCount = 0
+
+for item in library {
+    if item is Movie { //타입 확인
+        movieCount += 1
+    } else if item is Song {//타입 확인
+        songCount += 1
+    }
+}
+
+print("Media library contains \(movieCount) movies and \(songCount) songs")
+
+//형을 변환할 수 있는 다운 캐스팅
+/*
+부모 클래스 타입의 배열을 다운 캐스팅을 이용하여 자식 클래스들을 참조할 수 있다. as? 또는 as!로 형변환 가능
+ 
+ as? : 조건부 형식인 as?는 다운 캐스팅하려는 값이 옵셔널값으로 반환된다. 옵셔널 값이므로 if let 구문으로 값을 꺼내온다. (욥셔널 바인딩)
+ as! :  강제형식인 as!는 강제로 언래핑하여 값을 반환한다. -> 성공할거라 확신이 들 떼 사용.
+*/
+for item in library {
+    if let movie = item as? Movie {//Movie 타입으로 다운 캐스팅될 수 있으면 다음 구문 실행
+        print("Movie: \(movie.name), dir. \(movie.director)")
+    } else if let song = item as? Song {
+        print("Song: \(song.name), by \(song.artist)")
+    }
+}
