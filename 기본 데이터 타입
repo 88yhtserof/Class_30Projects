@@ -1,0 +1,47 @@
+//5. 기본 데이터 타입
+
+/*
+ Int 64bit 정수형
+ UInt 부호가 없는 64bit 정수형
+ Float 32bit 부동 소수점
+ Double 64bit 부동 소수점
+ Bool true, false 값
+ Character 문자
+ String 문자열
+ Any 모든 타입을 지칭하는 키워드
+ */
+//Int
+var someInt: Int = -100
+someInt = 100
+//someInt = 1.0 타입 오류, 스위프트는 타입 세이프, 타입 검사를 실시하고 오류 메세지를 보낸다.
+
+//UInt
+var someUInt: UInt = 200
+//someUInt = -100 부호가 있는 수 오류 발생
+
+//Float
+var someFloat: Float = 1.1
+someFloat = 1 //정수값을 할당하면 자동으로 1.0이 할당된다.
+print(someFloat)
+
+//Double
+var someDouble: Double = 1.1
+someDouble = 1 //정수값을 할당하면 자동으로 1.0이 할당된다.
+print(someDouble)
+
+//Bool
+var someBool: Bool = true
+someBool = false
+
+//Character
+var someCharacter: Character = "가"
+//someCharacter = "문자열은 할당이 안 된다."
+
+//String
+var someString: String = "문자열 할당"
+
+//타입 추론
+//스위프트는 타입 추론 기능이 있다.
+var some = "무슨 타입일까?"
+print(some,type(of: some))
+
