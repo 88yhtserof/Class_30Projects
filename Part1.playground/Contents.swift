@@ -989,3 +989,134 @@ print(status2)
 //에러를 던져주지 않은 것이라 확신할 때 사용
 let status3 = try! checkPhoneBatteryStatus(batteryLevel: 30)
 print(status3)
+
+
+//25. 클로저
+/*
+ 참조타입이고, 코드에서 전달 및 사용할 수 있는 독립 기능 블록이며, 일급 객체의 역할을 할 수 있다. -> (나)익명함수도 함수이기 때문
+ 일급객체란?
+ 전달 인자로 보낼 수 있고, 변수/상수 등으로 저장하거나 전달할 수 있으며, 함수의 반환 값이 될 수도 있다.
+ 
+ 클로저는 Names Closure, Unnames Closure 둘다를 말한다. 하지만 주로 Unnamed Closure, 즉 익명 함수를 뜻한다.
+ {(매개변수) -> 리턴 타입 in //클로저 헤드
+    실행 구문 //클로저 바디
+ }
+ 
+ 전달 인자 레이블은 사용하지 않는다.
+ */
+
+let hello2 = {()-> () in
+    print("Hello")
+}
+
+hello2()
+
+let hello3 = {(name: String) -> String in
+    return "Hello \(name)"
+}
+
+hello3("Renee")
+
+//매개변수가 closure인 함수 생성
+func doSomething(closure: () -> ()) {
+    closure()
+}
+
+//매개변수가 closure인 함수 호출
+doSomething(closure: { () -> () in
+    print("hello")
+})
+
+//반환 값이 closure인 함수 생성
+func doSometing2 () -> () -> () {
+    return {() -> () in
+        print("Hello doSometing2")
+    }
+}
+//반환 값이 closure인 함수 호출
+doSometing2()()
+
+//후행 클로져
+doSomething {
+    print("후행 클로저")
+}
+
+//다중 후행 클로저
+func doSomething2(success: () -> (), fail: () -> ()) {
+    
+}
+
+doSomething2 {
+    print("성공")
+} fail: {
+    print("실패")
+}
+
+
+//클로저 표현 간소화 -> 문법을 통해 코드를 단순하게 표현 가능
+
+func doSomething3(closure: (Int, Int, Int)-> Int) {
+    closure(1, 2, 3)
+}
+
+//표현 간소화 없이 작성
+doSomething3(closure: {(a, b, c) in
+    return a+b+c
+})
+
+//파라미터(매개변수)의 데이터 타입을 생략할 수 있다. 그리고 타입 유추를 통해 리턴 타입도 생략할 수 있다.
+//약식 인수($)를 사용하여 매개변수 이름을 대신할 수 있다.
+doSomething3(closure: {
+    return $0+$1+$2
+})
+
+//단일 리턴문만 남는다면 return 키워드도 생략할 수 있다.
+doSomething3(closure: {
+    $0+$1+$2
+})
+
+//후행 클로저 형식 사용가능
+doSomething3(){
+    $0+$1+$2
+}
+
+//단 하나의 클로저만 매개변수로 전달하는 경우 소괄호를 생략할 수 있다.
+doSomething3 {
+    $0+$1+$2
+}
+
+
+
+//26. 고차함수
+/*
+ 다른 함수를 전달 인자로 받거나 함수 실행의 결과를 함수로 반환하는 함수
+ 스위프트에서 함수는 일급객체이기때문에 함수의 매개변수, 반환값으로 사용될 수 있다
+ map, filter, reduce 모두 컬렉션(Collection) 타입에 구현되어있다.
+ */
+
+//map
+//컨테이너 내부에 기존 데이터를 변형하여 새로운 컨테이너를 만든다.
+let numberArray = [0,1,2,3] //컨테이너
+let mapArray = numberArray.map({(number) -> Int in
+    //numberArray 내부 데이터 변형하여 새로운 컨테이너 mapArray를 만든다.
+    return number * 2
+})
+print("map \(mapArray)")
+
+//filter
+//컨테이너 내부의 값을 조건에 맞게 걸러 새 컨테이너를 추출한다.
+let intArray = [10, 5, 20, 13, 4]
+let filterArray = intArray.filter{ $0 > 5}
+print("filter \(filterArray)")
+
+//reduce
+//컨테이너 내부의 요소들을 하나로 통합시켜준다
+let someArray = [1,2,3,4,5]
+let reduceResult = someArray.reduce(0) { //첫번때 매개변수 initialResult(초기값) 0 설정
+    (result: Int, element: Int) -> Int in //result 매개변수(첫번째 매개변수)는 누적값을 뜻한다.
+    print("\(result) + \(element)")
+    return result + element
+}
+
+print("reduce \(reduceResult)")
+
