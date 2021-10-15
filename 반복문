@@ -1,0 +1,35 @@
+//9. 반복문
+//반복적으로 코드가 실행되게 만드는 구문을 말한다.
+//for-in, while, repeat-while
+
+//for-in 일정횟수만큼 특정 문장을 반복하고자 할 때.
+for i in 1...4 {
+    print(i, terminator: " ")
+}
+
+let array: [Int] = [1, 2, 3, 4, 5]
+
+for i in array {
+    print(i, terminator: "/")
+}
+print("")
+ 
+
+//while - 정해진 횟수없이 조건식 불만족할 때까지 실행구문을 반복한다.
+var number = 5
+
+while number < 10 {
+    print(number)
+    number += 1
+}
+
+
+//repeat-while 적어도 한 번은 구문이 실행된다.
+var x = 6
+
+repeat {
+    x += 2
+}while x < 5
+
+print(x) //repeat-while 구문은 조건을 만족하지 않더라도 적어도 한 번은 구문이 실행되기 때문에 x는 8이 된다.
+
