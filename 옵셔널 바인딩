@@ -1,0 +1,47 @@
+//11. 옵셔널 바인딩
+/*
+ 옵셔널 값 추출 방법, 옵셔널 해제 방법
+ 명시적 해제 - 강제 해제, 비강제 해제(옵셔널 바인딩)
+ 묵시적 해제 - 컴파일러에 의한 자동 해제, 옵셔널의 묵시적 해제
+ */
+
+var num: Int? = 3
+print(num) //Optional(3)
+print(num!)  //3 - 옵셔널 강제 해제, 위험한 방법
+
+//안전하게 옵셔널 값을 추출하는 방법
+//비강제 해제(옵셔널 바인딩)
+if let result = num { //추출된 값이 변수 또는 상수로 result에 할당된다.
+    print(result)
+} else {
+    print("추출 실패 시 실행된다.")
+}
+
+//guard문으로 옵셔널 바인딩하는 방법
+func test() {
+    let number: Int? = 5
+    guard let result = number else { return }
+    print(result)
+}
+test()
+
+/*
+ if문을 사용하면 추출된 변수나 상수를 if문 안에서만 사용할 수 있는 반면에, guard문을 사용하면 guard문 다음, 함수 전체에서 추출된 변수나 상수를 사용할 수 있다.
+ guard문은 조건식을 통과하지 못하면 else문을 수행한 뒤 흐름을 종료해버린다.
+ */
+
+//묵시적 해제
+
+//1. 컴파일러가 자동적으로 해제한다.
+let value: Int? = 6
+if value == 6 {
+    print("value가 6입니다.")
+}else {
+    print("value가 6이 아닙니다.")
+}
+
+//2.옵셔널의 묵시적해제
+//데이터 타입 뒤에 !을 붙여 선언하면 묵시적 옵셔널 해제가 되어 자유롭게 일반값처럼 사용이 가능하다.
+let string: String = "12"
+var stringToInt: Int! = Int(string)
+print(stringToInt + 1)
