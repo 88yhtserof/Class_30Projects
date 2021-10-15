@@ -1,0 +1,8 @@
+//10. 옵셔널
+/*
+ 값이 있을 수도 있고 없을 수도 있다.
+ */
+
+var name: String?
+var optionalName: String? = "yh" //nil 뿐만이 아니라 일반 값도 넣을 수 있다.
+print(optionalName) //옵셔널 변수는 일반 변수와 구분된다.
