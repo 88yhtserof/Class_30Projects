@@ -1,0 +1,49 @@
+//19. assert와 guard
+/*
+ assert
+ - 특정 조건을 체크하고, 조건이 성립되지 않으면 에러와 함께 메세지를 출력하게 할 수 있는 함수
+ -assert함수는 디버깅 모드에서만 동작하고 주로 디버깅 중 조건의 검증을 위하여 사용한다.
+ guard문
+ -뭔가를 검사하여 그 다음에 오는 코드를 실행할지 말지 결정하는 것
+ -guard문에 주어진 조건문이 거짓일 때 구문이 실행된다.
+ 주로 얼리엣이라 하여 조건이 맞지 않으면 이후 문장을 실행하지 않도록 방어코드로 사용한다.
+ */
+
+//assert
+var value2 = 0
+assert(value2 == 0)
+
+//value2 = 2
+//assert(value == 0, "값이 0이 아닙니다.") //조건에 맞지 않으면 에러와 함께 메세지 출력
+
+
+//guard문 - 보통 잘못된 값이 함수에 들어가는 것을 방어하기 위해 사용
+//함수 내부에서 사용하도록 만들어진 구문
+/*
+ guard 조건 else {
+ //조건이 false이면 else 구문이 실행되고 return or throw or break을 통해 이 후 코드를 실행하지 않도록 한다.
+ }
+ */
+func guardTest(value: Int) {
+    guard value == 0 else {
+        return
+    }
+    //value가 0일 때만 print문 출력
+    print("안녕하세요. guardTest입니다.")
+}
+
+guardTest(value: 2)//value가 0이 아니기 떄문에 출력 안 됨
+guardTest(value: 0)
+
+//guard문을 이용해 옵셔널 바인딩을 할 수 있다.
+//guard문을 사용하면 옵셔널바인딩된 상수를 조건문 밖에서도 사용할 수 있다.
+func guardOptionalBinding(value: Int?) {
+    guard let value = value  else {// value인수에 값이 있다면 value상수에 할당되도록한다. value인수가 nil이라면 else구문 실행
+        return
+    }
+    //value가 0일 때만 print문 출력
+    print("안녕하세요. \(value)입니다.")
+}
+
+guardOptionalBinding(value: 2)
+guardOptionalBinding(value: nil)
