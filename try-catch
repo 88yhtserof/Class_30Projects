@@ -1,0 +1,67 @@
+//24. try-catch
+/*
+ 에러 처리란?
+ 프로그램 내에서 에러가 발생한 상황에 대응하고 이를 복구하는 과정
+ 스위프트에서 런타임 중 에러가 발생한 경우 이를 처리하기 위해
+ 발생(throwing), 감지(catching), 전파(propagating), 조작(manipulating) 을 지원하는 일급(?) 클래스를 제공한다.
+ 
+ 오류 처리 기능을 통해 이러 상황들을 구별하여 프로그램 자체적으로 오류를 해결할 수도 있고, 사용자에게 어떤 오류가 발생했는지 알려줄 수도 있다.
+ */
+// 스위프트에서 에러는 Error 프로토콜을 따르는 타입의 값으로 표현된다.
+//Error 프로토콜은 요구사항이 없는 빈 프로토콜이지만 에러를 표현하기 위해서 채택해야한다.
+//스위프트의 열거형은 오류 원인을 나누고, 해당 오류에 대한 특성에 대한 추가 정보를 전달하는모델을 만드는데에 적합하다
+
+enum PhoneError2: Error {
+    case unkown
+    case batteryLow(batteryLevel: Int)
+}
+
+//throw PhoneError2.batteryLow(batteryLevel: 20) //throw 구문을 통해서 에러가 발생할 것 같은 부분에 에러를 던져준다.
+
+//던져진 오류를 처리하기 위한 코드를 작성해야한다. 던져진 오류가 무엇인지 판단하여 다른 방법으로 문제를 해야해 본다던지, 사용자에게 오류를 알리는 등의 코드를 작성해야한다.
+
+/*
+ 스위프트에서 오류를 처리하는 4가지 방법
+ 1. 함수에서 발생한 오류를 해당 함수를 호출한 코드에 전파
+ 2. do-catch구문을 이용해 오류 처리
+ 3. 옵셔널 값으로 오류 처리
+ 4. 오류가 발생하지 않을 것이라 확신하기
+ */
+
+//1. 함수에서 발생한 오류를 해당 함수를 호출한 코드에 전파
+func checkPhoneBatteryStatus(batteryLevel: Int) throws -> String {
+    //false일 경우 else 구문 실행, 함수 조기 종료
+    guard batteryLevel != -1 else {throw PhoneError2.unkown}
+    guard batteryLevel > 20 else {throw PhoneError2.batteryLow(batteryLevel: 20)}
+    
+    //두 guard문이 true여야 아래 문장 실행된다.
+    return "배터리 상태가 양호합니다."
+}
+
+//이 메서드를 사용하려면 오류를 발생할 수도 있기 때문에 do-catch 구문이나 try?, try!를 사용하여 오류를 처리할 수 있어야 한다.
+
+//(1) do-catch 구문
+do {
+    try checkPhoneBatteryStatus(batteryLevel: 20)
+} catch PhoneError2.unkown {
+    print("알 수 없는 에러")
+} catch PhoneError2.batteryLow(let baterryLevel) {//연관값을 상수로 전달되게 한다.
+    print("배터리 부족: \(baterryLevel)%")
+} catch { //catch 뒤에 오류의 종류를 명시하지 않아도 코드블록을 생성하며 블록 내부에 암시적으로 error라는 이름의 지역상수가 오류 내용을 담아 들어오게 된다.
+    print("그 외 오류 발생: \(error)")
+}
+
+//(2) try?
+//오류를 옵셔널 값으로 변환하여 처리할 수 있다.
+//try ? 구문을 통해 동작하던 코드가 오류를 던지면 그 코드의 반환값은 nil이 된다.
+//만약 오류가 나지 않으면 Optional 값이 반환된다.
+let status1 = try? checkPhoneBatteryStatus(batteryLevel: 30)
+print(status1)
+let status2 = try? checkPhoneBatteryStatus(batteryLevel: 20)
+print(status2)
+
+
+//(3) try!
+//에러를 던져주지 않은 것이라 확신할 때 사용
+let status3 = try! checkPhoneBatteryStatus(batteryLevel: 30)
+print(status3)
