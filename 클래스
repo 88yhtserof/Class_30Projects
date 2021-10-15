@@ -1,0 +1,19 @@
+//13. 클래스
+
+class Dog {
+    var name: String = ""
+    var age: Int = 0
+    
+    //class에서는 생성자를 정의해주어야 한다.
+    init() {
+    }
+    
+    func infomation() {
+        print("\(name) \(age)")
+    }
+}
+
+var dog = Dog()
+dog.name = "CoCo"
+dog.age = 3
+dog.infomation()
