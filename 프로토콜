@@ -1,0 +1,71 @@
+//20. 프로토콜
+/*
+ 특정 역할을 하기 위한 메서드, 프로퍼티, 기타 요구하상 등의 청사진
+ 구조체 클래스 열거형은 프로토콜을 채택하여 프로토콜이 요구하는 사항을 구현할 수 있다.
+ 프로토콜의 요구사항을 모두 충족하면 해당 타입이 채택한 프로토콜을 준수한다고 말할 수 있다.
+ */
+
+protocol SomeProtocol {
+    
+}
+protocol SomeProtocol2 {
+    
+}
+
+struct SoneStructure: SomeProtocol, SomeProtocol2 { //프로토콜 채택하기
+    
+}
+/*
+class SomeClass : 부모클래스, 프로토콜1, 프로토콜2 {
+}
+
+ 프로토콜은 특정 역할을 수행하는 메서드, 프로퍼티, 기타 요구사항 등에 청사진 요구, 채택한 타입에게 요구사항을 준수하라고 요청
+ */
+protocol FirstProtocol {
+    //프로퍼티의 요구사항으로 이름과 타입, get set을 설정할 수 있다.
+    var name: Int {get set}
+    var age:Int {get}
+}
+
+protocol AnotherProtocol {
+    //타입 프로퍼티를 요구하려면 static 키워드 필수
+    static var someTypeProperty: Int {get set}
+}
+
+protocol FullyNames {
+    var fullName: String {get set}
+    func printFullName(name: String)
+}
+
+struct Person: FullyNames {
+    var fullName: String
+    
+    func printFullName(name: String) {
+        print(fullName)
+    }
+}
+
+protocol SomeProtocol3 {
+    //프로토콜이 요구사항으로 메서드 생성 시 메서드의 매개변수를 설정해주어야 하는데, default 값은 지정할 수 없다.
+    func someTypeMethode()
+}
+
+//이니셜 라이저 요구사항
+//프로토콜은 생성자도 요구할 수 있다.
+protocol SomeProtocol4 {
+    init(someParameter: Int)
+}
+
+protocol SomeProtocol5 {
+    init()
+}
+
+class SomeClass2: SomeProtocol5 {
+    // 클래스에서 프로토콜이 요구한 생성자를 구현하려면 required 키워드가 필요하다.
+    //만약 클래스 자체가 상속받을 수 없는 final 클래스라면 required 키워드가 필요없다.
+    //구조체에서 생성자 요구사항을 준수할 때는 required 키워드가 필요없다.
+    //즉 상속 가능 여부에 따라 required 필요 여부가 달라진다.
+    required init() {
+        
+    }
+}
