@@ -1,0 +1,27 @@
+//12. 구조체
+/*
+ 구조체와 클래스는 ㅍ데이터를 용도에 맞게 표현할 때 유용하다.
+ 구조화된 데이터와 기능을 만들 수 있어 새로운 사용자 정의 데이터 타입을 만들 수 있다.
+ 둘의 차이점: 구조체의 인스턴스는 값 타입, 클래스의 인스턴스는 참조 타입
+ */
+
+/*
+struct User {
+    var nickname: String
+    var age: Int
+    
+    func infomation() {
+        print("\(nickname) \(age)")
+    }
+}
+
+//인스턴스 - 메모리에 생성되는 클래스 또는 구조체의 실체
+
+var user = User(nickname: "yh", age: 100) //생성자 자동 생성
+user.nickname//인스턴스의 프로퍼티 접근하기
+user.nickname = "Arbelt"
+user.nickname
+
+//인스턴스의 메서드 접근하기
+user.infomation()
+*/
