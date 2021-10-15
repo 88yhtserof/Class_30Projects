@@ -1,0 +1,24 @@
+//23. 옵셔널 체이닝
+/*
+ 옵셔널에 속해 nil일지도 모르는 프로퍼티, 메서드, 서브스크립션 등을 가져오거나 호출할 때 사용할 수 있는 일련의 과정
+  옵셔널에 값이 있다면 프로퍼티, 메서드 등을 호출하고, 옵셔널이 nil이라면 nil을 반환한다.
+ */
+
+struct Developer {
+    var name: String
+}
+
+struct Company {
+    let name: String
+    var developer: Developer?
+}
+
+var developer = Developer(name: "han")
+var company = Company(name: "Gunter", developer: developer)
+print(company.developer)
+print(company.developer?.name) //?로 옵셔널 체이닝 - Optional로 값이 감싸진 채로 있다 -> 옵셔널 바인딩을 통해 값 추출 가능
+print(company.developer!.name) //!로 옵셔널 체이닝 - 강제 추출된다
+
+//이렇게 내부 프로퍼티를 접근할 때, 옵셔널 바인딩 없이 옵셔널 체이닝을 사용하여 쉽게 값에 접근할 수 있다.
+
+
