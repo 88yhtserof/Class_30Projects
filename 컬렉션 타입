@@ -1,0 +1,54 @@
+//6. 컬렉션 타입
+/*
+ 컬렉션 타입이란?
+ 컬렉션 타입은 데이터들의 집합 묶음. 지정된 타입의 데이터를 한데 모은 것
+ Array
+ 데이터 타입의 값들을 순서대로 저장하는 리스트
+ Dictionary
+ 순성없이 키와 값 한 쌍으로 데이터를 저장하는 컬렉션 타입
+ Set
+ 같은 데이터 타입의 값을 순서없이 저장하는 리스트. 중복 불허-> 멤버 고유함을 보장한다.
+ */
+
+//Array
+var numbers: Array<Int> = Array<Int>()
+numbers.append(1)
+numbers.append(2)
+//순서가 있기때문에 인덱스로 각 요소에 접근할 수 있다.
+numbers[0]
+
+numbers.insert(10, at: 1) //1번 인덱스에 10 넣기 -> 기존 1번 인덱스의 값은 2번으로 밀려난다.
+numbers
+
+numbers.remove(at: 1) //1번 인덱스 삭제
+numbers
+/*
+ 보통 배열 선언 시 축약된 문법으로 선언
+ var names = [String]()
+ var names: [String] = []
+ */
+
+//Dictionary
+//var dictionary: Dictionary<String, Int> = Dictionary<String, Int>()
+var dictionary: [String: Int] = ["권태완" : 1]
+dictionary["김철수"] = 3 //딕셔너리에 키를 지정하여 값을 할당하면 해당 딕셔너리에 추가된다.
+dictionary["영희"] = 10
+dictionary //딕셔너리는 순서가 없다.
+
+dictionary.removeValue(forKey: "권태완") //해당 키를 가진 요소가 삭제된다.
+dictionary
+
+
+//Set
+//순서가 없고 멤버가 고유함을 보장하는 컬렉션
+var set: Set = Set<Int>() //축약형 없다.
+
+set.insert(10)
+set.insert(20)
+set.insert(30)
+set.insert(30)
+set //값을 중복하여 삽입해도 중복저장하지 않는다.
+
+set.remove(20)
+set
+
