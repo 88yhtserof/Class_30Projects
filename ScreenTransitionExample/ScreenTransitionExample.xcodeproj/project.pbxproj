@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9A018E012745415900F932E7 /* CodePresentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A018E002745415900F932E7 /* CodePresentViewController.swift */; };
 		9A1D72192740017F001DB9A0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1D72182740017F001DB9A0 /* AppDelegate.swift */; };
 		9A1D721B2740017F001DB9A0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1D721A2740017F001DB9A0 /* SceneDelegate.swift */; };
 		9A1D721D2740017F001DB9A0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1D721C2740017F001DB9A0 /* ViewController.swift */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9A018E002745415900F932E7 /* CodePresentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodePresentViewController.swift; sourceTree = "<group>"; };
 		9A1D72152740017F001DB9A0 /* ScreenTransitionExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ScreenTransitionExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A1D72182740017F001DB9A0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9A1D721A2740017F001DB9A0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -72,6 +74,7 @@
 				9A1D722C274005C2001DB9A0 /* SeguePushViewController.swift */,
 				9A1D723027400F83001DB9A0 /* SeguePresentViewController.swift */,
 				9AE6A7AF2743F3DB001BAF8D /* CodePushViewController.swift */,
+				9A018E002745415900F932E7 /* CodePresentViewController.swift */,
 			);
 			path = ScreenTransitionExample;
 			sourceTree = "<group>";
@@ -150,6 +153,7 @@
 				9AE6A7B02743F3DB001BAF8D /* CodePushViewController.swift in Sources */,
 				9A1D721D2740017F001DB9A0 /* ViewController.swift in Sources */,
 				9A1D72192740017F001DB9A0 /* AppDelegate.swift in Sources */,
+				9A018E012745415900F932E7 /* CodePresentViewController.swift in Sources */,
 				9A1D723127400F83001DB9A0 /* SeguePresentViewController.swift in Sources */,
 				9A1D721B2740017F001DB9A0 /* SceneDelegate.swift in Sources */,
 			);

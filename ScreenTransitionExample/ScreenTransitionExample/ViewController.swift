@@ -28,5 +28,15 @@ class ViewController: UIViewController {
         self.navigationController?.pushViewController(viewController, animated: true)
         //상단의 back버튼을 누르거나 left edge swipe를 사용하여 이전 화면으로 넘어갈 수 있다.
     }
+    @IBAction func tapCodePresentBtn(_ sender: UIButton) {
+        //instantiateViewController메서드를 사용해서 스토리보드 내 뷰 컨트롤러를 인스턴스화한다.
+        //옵셔널을 반환하기 때문에 guard문을 사용해서 옵셔널 바인딩한다.-> 명시적으로 옵셔널 값 추출
+        guard let viewController = self.storyboard?.instantiateViewController(identifier: "CodePresentViewController") else {return}
+        //모달 화면 스타일 변경. 풀스타일
+        viewController.modalPresentationStyle = .fullScreen
+        
+        //present메서드에 인스턴스화된 ViewController를 넘겨준다.
+        self.present(viewController, animated: true, completion: nil)
+    }
 }
 
