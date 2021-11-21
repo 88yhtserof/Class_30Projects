@@ -12,7 +12,27 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        print("ViewController/ viewDidLoad/ 화면이 로드되었다.")
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        print("ViewController/ viewWillAppear/ 화면이 나타날 것이다.")
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        print("ViewController/ viewDidAppear/ 화면이 나타났다.")
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        print("ViewController/ viewWillDisappear/ 화면이 사라질 것이다.")
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        print("ViewController/ viewDidDisappear/ 화면이 사라졌다.")
     }
 
 
